@@ -1,6 +1,5 @@
-SELECT COUNT(*)
-FROM dishes
-         INNER JOIN restaurants ON restaurants.id = dishes.restaurant_id
-         INNER JOIN orders ON restaurants.id = orders.restaurant_id
-         INNER JOIN users ON users.id = orders.user_id
-WHERE dishes."name" = 'Харчо с изюминкой';
+SELECT restaurants.id, restaurants."name"
+FROM restaurants
+         RIGHT JOIN dishes ON restaurants.id = dishes.restaurant_id
+         RIGHT JOIN orders ON dishes.id = orders.dish_id
+WHERE orders.user_id = '1031f963-957c-425f-962e-767080a699cb';

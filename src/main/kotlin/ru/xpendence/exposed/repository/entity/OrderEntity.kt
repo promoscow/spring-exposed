@@ -1,13 +1,13 @@
 package ru.xpendence.exposed.repository.entity
 
 import org.jetbrains.exposed.dao.id.IdTable
-import org.jetbrains.exposed.sql.javatime.timestampWithTimeZone
+import org.jetbrains.exposed.sql.javatime.date
 import java.util.UUID
 
 object OrderEntity : IdTable<UUID>("orders") {
     override val id = uuid("id").entityId()
     override val primaryKey = PrimaryKey(id)
-    val date = timestampWithTimeZone("date")
+    val date = date("date")
     val userId = reference("user_id", UserEntity)
-    val restaurantId = reference("restaurant_id", RestaurantEntity)
+    val dishId = reference("dish_id", RestaurantEntity)
 }
