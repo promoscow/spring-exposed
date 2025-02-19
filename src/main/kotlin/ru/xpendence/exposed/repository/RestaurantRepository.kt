@@ -6,4 +6,6 @@ import java.util.UUID
 interface RestaurantRepository {
 
     fun getAllByUserOrdered(userId: UUID): List<Restaurant>
+
+    fun getByNameILike(namePart: String): List<Restaurant>
 }

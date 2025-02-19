@@ -4,5 +4,6 @@ create table dishes
     name          varchar(255),
     price         numeric(19, 2),
     active        boolean,
+    version       int,
     restaurant_id uuid references restaurants (id)
 );
