@@ -1,9 +1,9 @@
-package ru.xpendence.exposed.repository.entity
+package ru.xpendence.exposed.repository.table
 
 import org.jetbrains.exposed.dao.id.IdTable
 import java.util.UUID
 
-object RestaurantEntity : IdTable<UUID>("restaurants") {
+object RoleTable : IdTable<UUID>("roles") {
     override val id = uuid("id").entityId()
     override val primaryKey = PrimaryKey(id)
     val name = varchar("name", 255)

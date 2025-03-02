@@ -11,33 +11,33 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import org.springframework.stereotype.Repository
 import ru.xpendence.exposed.domain.Restaurant
 import ru.xpendence.exposed.repository.RestaurantRepository
-import ru.xpendence.exposed.repository.entity.DishEntity
-import ru.xpendence.exposed.repository.entity.OrderEntity
-import ru.xpendence.exposed.repository.entity.RestaurantEntity
 import ru.xpendence.exposed.repository.mapper.toRestaurant
+import ru.xpendence.exposed.repository.table.DishTable
+import ru.xpendence.exposed.repository.table.OrderTable
+import ru.xpendence.exposed.repository.table.RestaurantTable
 import java.util.UUID
 
 @Repository
 class RestaurantRepositoryImpl: RestaurantRepository {
 
     override fun getAllByUserOrdered(userId: UUID): List<Restaurant> = transaction {
-        RestaurantEntity
-            .rightJoin(DishEntity)
+        RestaurantTable
+            .rightJoin(DishTable)
             .join(
-                otherTable = OrderEntity,
+                otherTable = OrderTable,
                 joinType = JoinType.RIGHT,
-                onColumn = DishEntity.id,
-                otherColumn = OrderEntity.dishId
+                onColumn = DishTable.id,
+                otherColumn = OrderTable.dishId
             )
-            .select(RestaurantEntity.columns)
-            .where { OrderEntity.userId eq userId }
+            .select(RestaurantTable.columns)
+            .where { OrderTable.userId eq userId }
             .map { it.toRestaurant() }
     }
 
     override fun getByNameILike(namePart: String): List<Restaurant> = transaction {
-        RestaurantEntity
+        RestaurantTable
             .selectAll()
-            .where { RestaurantEntity.name iLike "%$namePart%" }
+            .where { RestaurantTable.name iLike "%$namePart%" }
             .map { it.toRestaurant() }
     }
 }
