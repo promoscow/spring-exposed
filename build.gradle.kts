@@ -21,7 +21,10 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.jetbrains.exposed:exposed-spring-boot-starter:0.58.0")
+	implementation("org.apache.commons:commons-lang3:3.17.0")
 	implementation("org.jetbrains.exposed:exposed-java-time:0.58.0")
+	implementation("org.openapitools:jackson-databind-nullable:0.2.6")
+	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.3")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.flywaydb:flyway-core")
