@@ -1,12 +1,8 @@
 package ru.xpendence.exposed.repository.impl
 
-import org.jetbrains.exposed.sql.JoinType
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.deleteWhere
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
-import org.jetbrains.exposed.sql.update
 import org.springframework.stereotype.Repository
 import ru.xpendence.exposed.domain.Restaurant
 import ru.xpendence.exposed.repository.RestaurantRepository
@@ -16,7 +12,7 @@ import ru.xpendence.exposed.repository.table.OrderTable
 import ru.xpendence.exposed.repository.table.RestaurantTable
 import ru.xpendence.exposed.repository.utils.iLike
 import ru.xpendence.exposed.repository.utils.toJson
-import java.util.UUID
+import java.util.*
 
 @Repository
 class RestaurantRepositoryImpl : RestaurantRepository {
@@ -30,7 +26,7 @@ class RestaurantRepositoryImpl : RestaurantRepository {
             .resultedValues
             ?.single()
             ?.toRestaurant()
-            ?: throw IllegalStateException("Error inserting restaurant: $${restaurant.toJson()}. Result is null.")
+            ?: throw IllegalStateException("Error inserting restaurant: ${restaurant.toJson()}. Result is null.")
     }
 
     override fun update(restaurant: Restaurant) {
